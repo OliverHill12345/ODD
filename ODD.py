@@ -32,6 +32,8 @@ Difference = 0
 Delta = 0
 PixelToMetric = 0
 DotRadius = 8 #8mm dot diameter
+MeasuredRadius = 0
+RadiusMeasure = 1
 
 hul=0
 huh=179
@@ -157,6 +159,11 @@ while True:
                  M = cv2.moments(c)
                  cv2.putText(frame, "#{}".format(i + 1), (x, y - 15),
                              cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+                 
+                 if (RadiusMeasure ==1):
+                     MeasuredRadius = radius
+                     RadiusMeasure = 0
+                 
                  if i == 0:
                      FirstPoint = int(cX)
                      
@@ -185,7 +192,7 @@ while True:
                      #d2 = int(SecondInitial - SecondPoint)
                      Difference = int(FirstPoint - SecondPoint)
                      Delta = Difference - DeltaInitial
-                     PixelToMetric =  DotRadius / radius
+                     PixelToMetric =  DotRadius / MeasuredRadius
                      PixelToMetricDelta = PixelToMetric * Delta
                      
                      
